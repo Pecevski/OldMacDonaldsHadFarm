@@ -36,9 +36,15 @@ namespace Polymorphic_Approach.Services
                 return;
             }
 
+            int idCounter = 1;
             foreach (var animal in animals)
             {
-                _ioProvider.PrintToOutput($"Name: {animal.Name}, Sound: {animal.Sound}");
+                if(animal.Id == 0)
+                {
+                    animal.Id = GenerateId();
+                }
+                _ioProvider.PrintToOutput($"ID: {animal.Id}, Name: {animal.Name}, Sound: {animal.Sound}");
+                idCounter++;
             }
         }
         public void ChooseAnimal()
@@ -66,6 +72,17 @@ namespace Polymorphic_Approach.Services
         private Animal? GetAnimalById(int id)
         {
             return id <= animals.Count ? animals[id - 1] : null;
+        }
+
+        public int GenerateId()
+        {
+            int newId = 1;
+
+            if(animals.Any())
+            {
+                newId = animals.Max(x => x.Id) + 1;
+            }
+            return newId;
         }
 
     }

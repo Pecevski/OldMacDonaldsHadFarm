@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Polymorphic_Approach.Entities
 {
-    public abstract class Animal
+    public abstract class Animal : BaseEntity
     {
         [Required]
         [Length(1, 20)]
