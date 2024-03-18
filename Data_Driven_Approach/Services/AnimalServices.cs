@@ -7,11 +7,13 @@ namespace Data_Driven_Approach.Services
     {
         private readonly IAnimalContext _animalContext;
         private readonly IInputOutputProvider _ioProvider;
+        private readonly IdGenerator _idGenerator;
 
-        public AnimalServices(IAnimalContext animalContext, IInputOutputProvider ioProvider)
+        public AnimalServices(IAnimalContext animalContext, IInputOutputProvider ioProvider, IdGenerator idGenerator)
         {
             _animalContext = animalContext;
             _ioProvider = ioProvider;
+            _idGenerator = idGenerator;
 
         }
         public void PrintAllAnimal()
@@ -22,9 +24,15 @@ namespace Data_Driven_Approach.Services
                 return;
             }
 
+            int counterId = 1;
             foreach (var animal in _animalContext.Animals)
             {
-                _ioProvider.PrintToOutput($"Name: {animal.Name}, Sound: {animal.Sound}");
+                if (animal.Id == 0)
+                {
+                    animal.Id = _idGenerator.GenerateId();
+                }
+                _ioProvider.PrintToOutput($"ID: {animal.Id}, Name: {animal.Name}, Sound: {animal.Sound}");
+                counterId++;
             }
         }
         public void ChooseAnimal()
@@ -68,7 +76,9 @@ namespace Data_Driven_Approach.Services
             Console.Write("Enter the sound of the new animal: ");
             string sound = _ioProvider.GetFromInput().CheckNullOrEmpty();
 
-            Animal newAnimal = new Animal { Name = name, Sound = sound };
+            int animalId = _idGenerator.GenerateId();
+
+            Animal newAnimal = new Animal {Id = animalId, Name = name, Sound = sound };
             _animalContext.Animals.Add(newAnimal);
 
             _ioProvider.PrintToOutput($"New animal '{name}' with sound '{sound}' added successfully!");

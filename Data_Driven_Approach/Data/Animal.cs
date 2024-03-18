@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Data_Driven_Approach.Data
 {
-    public class Animal
+    public class Animal : BaseEntity
     {
         [Required]
         [Length(1, 20)]

@@ -8,7 +8,8 @@ internal class Program
     {
         var ioprovider = new InputOutputProvider();
         var context = new AnimalContext(ioprovider);
-        var services = new AnimalServices(context, ioprovider);
+        var idgenerator = new IdGenerator(context);
+        var services = new AnimalServices(context, ioprovider, idgenerator);
         AnimalsMenu menu = new AnimalsMenu(ioprovider, services);
         menu.ShowAnimalsMenu();
     }
