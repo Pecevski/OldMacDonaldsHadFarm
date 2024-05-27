@@ -29,7 +29,7 @@ namespace Data_Driven_Approach.Services
             {
                 if (animal.Id == 0)
                 {
-                    animal.Id = _idGenerator.GenerateId();
+                    animal.Id = _idGenerator.GenerateNewId();
                 }
                 _ioProvider.PrintToOutput($"ID: {animal.Id}, Name: {animal.Name}, Sound: {animal.Sound}");
                 counterId++;
@@ -76,7 +76,7 @@ namespace Data_Driven_Approach.Services
             Console.Write("Enter the sound of the new animal: ");
             string sound = _ioProvider.GetFromInput().CheckNullOrEmpty();
 
-            int animalId = _idGenerator.GenerateId();
+            int animalId = _idGenerator.GenerateNewId();
 
             Animal newAnimal = new Animal {Id = animalId, Name = name, Sound = sound };
             _animalContext.Animals.Add(newAnimal);
