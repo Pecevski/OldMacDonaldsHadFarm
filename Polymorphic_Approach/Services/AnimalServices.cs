@@ -41,7 +41,7 @@ namespace Polymorphic_Approach.Services
             {
                 if(animal.Id == 0)
                 {
-                    animal.Id = GenerateId();
+                    animal.Id = GenerateNewId();
                 }
                 _ioProvider.PrintToOutput($"ID: {animal.Id}, Name: {animal.Name}, Sound: {animal.Sound}");
                 idCounter++;
@@ -74,7 +74,7 @@ namespace Polymorphic_Approach.Services
             return id <= animals.Count ? animals[id - 1] : null;
         }
 
-        public int GenerateId()
+        public int GenerateNewId()
         {
             int newId = 1;
 

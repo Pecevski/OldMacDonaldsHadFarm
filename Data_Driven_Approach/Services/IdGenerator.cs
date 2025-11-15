@@ -15,7 +15,7 @@ namespace Data_Driven_Approach.Services
         {
             _animalContext = animalContext;  
         }
-        public int GenerateId() 
+        public int GenerateNewId() 
         { 
             int newId = 1;
 
